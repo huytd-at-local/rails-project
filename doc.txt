@@ -1,1 +1,9 @@
 rails g controller home top
+
+rails g model Post content:text
+rails db:migrate
+
+validates :content, {presence: true}
+
+rails g controller posts index
+
