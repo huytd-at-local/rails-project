@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="posts-index">
+        <h3>Edit</h3>
+        <% @post.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+        <% end %>
+        <%= form_tag("/posts/#{@post.id}/update") do %>
+        <form>
+            <textarea name="content" >
+                <%= @post.content %>
+            </textarea>
+            <br>
+            <button type="submit">OK</button>
+        </form>
+        <% end %>
+    </div>
+</div>

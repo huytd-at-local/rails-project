@@ -7,3 +7,4 @@ validates :content, {presence: true}
 
 rails g controller posts index
 
+@post.errors.full_messages.each do |message|

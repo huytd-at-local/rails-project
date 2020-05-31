@@ -15,10 +15,12 @@
       </div>
       <div class="header-right-menu">
         <%= link_to("TweetAppとは", "/about")%>
-        <%= link_to("投稿一覧", "/posts/index")%>
+        <%= link_to("New post", "/posts/new")%>
+        <%= link_to("Post list", "/posts/index")%>
       </div>
     </div>  
     </header>
+    <h4 class="flash"><%= flash[:notice] %></h4>
   <body>
     <%= yield %>
   </body>

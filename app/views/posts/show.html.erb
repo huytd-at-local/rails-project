@@ -2,5 +2,8 @@
     <div class="posts-index">
         <p><%= @post.content %></p>
         <p><%= @post.created_at %></p>
+        <%= link_to("Edit", "/posts/#{@post.id}/edit") %>
+        <br>
+        <%= link_to("Delete", "/posts/#{@post.id}/destroy", {method: "post"}) %>
     </div>
 </div>
