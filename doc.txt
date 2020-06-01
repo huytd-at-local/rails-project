@@ -8,3 +8,8 @@ validates :content, {presence: true}
 rails g controller posts index
 
 @post.errors.full_messages.each do |message|
+
+user table
+rails g model table user:string password:string
+
+create user
