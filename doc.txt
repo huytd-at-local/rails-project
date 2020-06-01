@@ -13,3 +13,5 @@ user table
 rails g model table user:string password:string
 
 create user
+rails g controller Users new
+
