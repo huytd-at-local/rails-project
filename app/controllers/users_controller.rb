@@ -43,4 +43,24 @@ class UsersController < ApplicationController
       render("users/edit")
     end
   end
+  def login_form
+
+  end
+  def login
+    @user = User.find_by(email: params[:email], password: params[:password])
+    if @user
+      flash[:notice] = "login success"
+      session[:user_id] = @user.id
+      redirect_to("/posts/index")
+    else
+      @error_msg = "wrong email or password"
+      render('users/login_form')
+    end
+  end
+
+  def logout
+    session[:user_id] = nil
+    flash[:notice] = "you are logout"
+    redirect_to("/login_form")
+  end
 end

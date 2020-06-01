@@ -15,3 +15,5 @@ rails g model table user:string password:string
 create user
 rails g controller Users new
 
+rails g migration add_user_id_to_posts
+
