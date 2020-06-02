@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+
+  before_action :ensure_logout, {only: [:login_form, :login, :new, :create]}
   def new
     @user = User.new
   end
@@ -38,7 +40,7 @@ class UsersController < ApplicationController
     end
     if @user.save
       flash[:notice] = "edit success"
-      redirect_to("/users/#{@user.id}")
+      redirect_to "/users/#{@user.id}"
     else
       render("users/edit")
     end
@@ -51,7 +53,7 @@ class UsersController < ApplicationController
     if @user
       flash[:notice] = "login success"
       session[:user_id] = @user.id
-      redirect_to("/posts/index")
+      redirect_to "/posts/index"
     else
       @error_msg = "wrong email or password"
       render('users/login_form')
@@ -61,6 +63,6 @@ class UsersController < ApplicationController
   def logout
     session[:user_id] = nil
     flash[:notice] = "you are logout"
-    redirect_to("/login_form")
+    redirect_to "/login_form"
   end
 end
