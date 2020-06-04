@@ -8,9 +8,9 @@ class ApplicationController < ActionController::Base
     end
 
     def ensure_login
-        if session[:user_id] = nil
+        if session[:user_id] == nil
             flash[:notice] = "you have to login"
-            redirect_to "/login"
+            redirect_to "/login_form"
         end
     end
 
