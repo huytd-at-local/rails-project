@@ -1,11 +1,13 @@
 class PostsController < ApplicationController
   before_action :ensure_login, {only: [:new, :create, :edit, :update, :destroy]}
+  before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
   def index
     @posts = Post.all.order(created_at: :desc)
   end
 
   def show
     @post = Post.find_by(id: params[:id])
+    @user = @post.user
   end
 
   def new
@@ -13,7 +15,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(content: params[:content])
+    @post = Post.new(content: params[:content], user_id: @current_user.id)
     if @post.save
       flash[:notice] = "create success"
       redirect_to("/posts/#{@post.id}")
@@ -42,5 +44,12 @@ class PostsController < ApplicationController
     @post.destroy
     flash[:notice] = "delete success"
     redirect_to("/posts/index")
+  end
+
+  def ensure_correct_user
+    if @current_user != Post.find_by(id: params[:id]).user
+      flash[:notice] = "you don't have permission"
+      redirect_to "/posts/index"
+    end
   end
 end

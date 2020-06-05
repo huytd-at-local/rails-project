@@ -2,8 +2,11 @@
     <div class="posts-index">
         <p><%= @post.content %></p>
         <p><%= @post.created_at %></p>
+        <h3><%= link_to(@user.name, "/users/#{@user.id}") %></h3>
+        <% if @current_user == @user %>
         <%= link_to("Edit", "/posts/#{@post.id}/edit") %>
         <br>
         <%= link_to("Delete", "/posts/#{@post.id}/destroy", {method: "post"}) %>
+        <% end %>
     </div>
 </div>

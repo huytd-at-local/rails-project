@@ -17,3 +17,5 @@ rails g controller Users new
 
 rails g migration add_user_id_to_posts
 
+@post = Post.find_by(id: params[:id])
+@user = User.find_by(id: @post.user_id)
