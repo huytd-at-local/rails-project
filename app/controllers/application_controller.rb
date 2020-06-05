@@ -20,4 +20,12 @@ class ApplicationController < ActionController::Base
             redirect_to "/posts/index"
         end
     end
+
+    def correct_user_checking
+        # if @current_user != User.find_by(id: params[:id])
+        if @current_user.id != params[:id].to_f
+            flash[:notice] = "you don't have permission"
+            redirect_to "/posts/index"
+        end
+    end
 end

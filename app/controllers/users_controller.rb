@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :ensure_logout, {only: [:login_form, :login, :new, :create]}
   before_action :ensure_login, {only: [:edit, :update, :logout]}
+  before_action :correct_user_checking, {only: [:edit, :update]}
   def new
     @user = User.new
   end
