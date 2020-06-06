@@ -10,28 +10,56 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <header>
-    <div class="container">
-        <div class="header-logo">
-            <%= link_to("TweetApp", "/")%>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
+        <div class="container">
+            <%= link_to("TweetApp", "/", class: "navbar-brand")%>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <% if @current_user %>
+                    <li class="nav-item">
+                        <%= link_to(@current_user.name, "/users/#{@current_user.id}", class: "nav-link") %>
+                    </li>
+                    <% end %>
+                    <% if session[:user_id] == nil %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/new">Sign up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login_form">Login</a>
+                    </li>
+                    <% else %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/posts/new">Make tweet</a>
+                    </li>
+                    <li class="nav-item">
+                        <%= link_to "/logout", :class => "nav-link", :method => :post do %>
+                        Logout
+                        <% end %>
+                    </li>
+                    <% end %>
+                </ul>
+            </div>
         </div>
-        <div class="header-right-menu">
-            <% if @current_user %>
-            <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
-            <% end %>
-            <%= link_to("Post-list", "/posts/index")%>
-            <%= link_to("User-list", "/users/index")%>
-            <% if session[:user_id] == nil %>
-            <%= link_to("About-TweetApp", "/about")%>
-            <%= link_to("Sign-up", "/users/new")%>
-            <%= link_to("login", "/login_form")%>
-            <% else %>
-            <%= link_to("New-post", "/posts/new")%>
-            <%= link_to("logout", "/logout", {method: "post"})%>
-            <% end %>
-        </div>
+    </nav>
+    <% if flash[:notice] %>
+    <div class="alert alert-primary">
+        <strong><%= flash[:notice] %></strong>
     </div>
+    <% end %>
 </header>
-<h4 class="flash"><%= flash[:notice] %></h4>
+
 
 <body>
     <%= yield %>

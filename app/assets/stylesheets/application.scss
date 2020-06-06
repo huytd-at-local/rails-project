@@ -9,24 +9,15 @@
  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
  */
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 
 body {
-    background-color: lightseagreen;
-}
-header {
-    height: 50px;
-    line-height: 50px;
-}
-.container {
-    padding: 0 30px;
-}
+    background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+  }
 
-.flash {
-    text-align: center;
-}
