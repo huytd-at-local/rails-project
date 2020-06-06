@@ -29,6 +29,9 @@
                         <%= link_to(@current_user.name, "/users/#{@current_user.id}", class: "nav-link") %>
                     </li>
                     <% end %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/posts/index">Timeline</a>
+                    </li>
                     <% if session[:user_id] == nil %>
                     <li class="nav-item">
                         <a class="nav-link" href="/about">About</a>
