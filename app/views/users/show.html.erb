@@ -2,7 +2,7 @@
     <img src="<%= "/user_images/#{@user.image_name}" %>" alt="">
     <p><%= @user.name%> </p>
     <p><%= @user.email%> </p>
-    <% if @current_user.id == @user.id %>
+    <% if @current_user && @current_user.id == @user.id %>
     <p><%= link_to("edit", "/users/#{@user.id}/edit") %> </p>
     <% end %>
     <h3>Posts:</h3>
