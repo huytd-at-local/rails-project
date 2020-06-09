@@ -67,7 +67,7 @@
 <body>
     <div class="container">
         <%= form_with url: search_path, method: :get, local: true do |f| %>
-        <%= f.text_field :book_name, placeholder: "insert here" %>
+        <%= f.text_field :keyword, placeholder: "insert here" %>
         <% end %>
     </div>
     <%= yield %>

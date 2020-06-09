@@ -1,22 +1,21 @@
 require 'net/http'
 require 'uri'
+require 'httparty'
+
 class SearchController < ApplicationController
   
   def search
-    if book_name = params[:book_name]
-      params = URI.encode_www_form({q: book_name})
-      uri = URI.parse("https://www.googleapis.com/books/v1/volumes?#{params}&country=VN")
-      response = Net::HTTP.get_response(uri)
-      item = JSON.parse(response.body)
-      if item["results"]
-        @title = item["items"][0]["volumeInfo"]["title"]
-        @authors = item["items"][0]["volumeInfo"]["authors"][0]
-        @description = item["items"][0]["volumeInfo"]["description"]
-        @image = item["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
+    keyword = params[:keyword]
+    url = URI.encode("https://www.googleapis.com/books/v1/volumes?q=#{keyword}&country=VN")
+    results = HTTParty.get(url)
+      if results["items"]
+        @title = results["items"][0]["volumeInfo"]["title"]
+        @authors = results["items"][0]["volumeInfo"]["authors"][0]
+        @description = results["items"][0]["volumeInfo"]["description"]
+        @image = results["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
       else
-        @test = "fail"
+        @test = "test"
       end
-    end
   end
 
 end
