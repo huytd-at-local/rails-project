@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/search' => 'search#search'
   post '/logout' => 'users#logout'
   get '/login_form' => 'users#login_form'
   post '/login' => 'users#login'
