@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/posts/:id/likes/create' => 'likes#create'
+  get '/posts/:id/likes/destroy' => 'likes#destroy'
   get '/search' => 'search#search'
   post '/logout' => 'users#logout'
   get '/login_form' => 'users#login_form'
@@ -15,7 +17,7 @@ Rails.application.routes.draw do
   get '/posts/:id' => "posts#show"
 
   get "/posts/:id/edit" => "posts#edit"
-  post "/posts/:id/update" => "posts#update"
+  post "/posts/:id/update" => "posts#update" 
   post '/posts/:id/destroy' => "posts#destroy"
   get '/' => "home#top"
   get "/about" => "home#about"
