@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    @posts = @user.posts
+    @posts = @user.posts.order(created_at: :desc)
   end
 
   def edit
@@ -51,8 +51,8 @@ class UsersController < ApplicationController
 
   end
   def login
-    @user = User.find_by(email: params[:email], password: params[:password])
-    if @user
+    @user = User.find_by(email: params[:email])
+    if @user && @user.authenticate(params[:password])
       flash[:notice] = "login success"
       session[:user_id] = @user.id
       redirect_to "/posts/index"

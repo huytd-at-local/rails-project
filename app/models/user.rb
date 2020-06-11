@@ -1,7 +1,8 @@
 class User < ApplicationRecord
+    has_secure_password
     validates :email, {presence: true, uniqueness: true} 
     validates :name, {presence: true, uniqueness: true}
-    validates :password, {presence: true}
+    # validates :password, {presence: true}
     validates :image_name, {presence: true} 
 
     def posts
