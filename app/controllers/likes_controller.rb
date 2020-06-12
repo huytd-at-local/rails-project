@@ -1,4 +1,5 @@
 class LikesController < ApplicationController
+  before_action :ensure_login
   def create
     like = Like.new(post_id: params[:id], user_id: @current_user.id)
     like.save

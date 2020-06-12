@@ -3,16 +3,25 @@
     <p><%= @user.name%> </p>
     <p><%= @user.email%> </p>
     <% if @current_user && @current_user.id == @user.id %>
-    <p><%= link_to("edit", "/users/#{@user.id}/edit") %> </p>
+        <p><%= link_to("edit", "/users/#{@user.id}/edit") %> </p>
+    <% end %>
+    <!-- follower count -->
+    <%= "#{@follows.count} followers"%>
+    <% if @current_user %>
+            <% if Follow.find_by(follow_user_id: @user.id, follower_id: @current_user.id) %>
+                <%= link_to("unfollow", "/users/#{@user.id}/unfollow", {method: "post"}) %>
+            <% else %>
+            <%= link_to("follow", "/users/#{@user.id}/follow", {method: "post"}) %>
+            <% end %>
     <% end %>
     <h3>Posts:</h3>
     <% @posts.each do |post| %>
-    <h4><%= link_to(post.content, "/posts/#{post.id}") %></h4>
+        <h4><%= link_to(post.content, "/posts/#{post.id}") %></h4>
     <% end %>
     <h3>Liked posts:</h3>
     <% @likes.each do |like| %>
-    <% post = Post.find_by(id: like.post_id)%>
-    <%= link_to(post.content, "/posts/#{post.id}") %>
-    <br>
+        <% post = Post.find_by(id: like.post_id)%>
+        <%= link_to(post.content, "/posts/#{post.id}") %>
+        <br>
     <% end %>
 </div>
