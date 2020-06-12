@@ -10,8 +10,7 @@
     <h4><%= link_to(post.content, "/posts/#{post.id}") %></h4>
     <% end %>
     <h3>Liked posts:</h3>
-    <% likes = Like.where(user_id: @user.id).order(created_at: :desc) %>
-    <% likes.each do |like| %>
+    <% @likes.each do |like| %>
     <% post = Post.find_by(id: like.post_id)%>
     <%= link_to(post.content, "/posts/#{post.id}") %>
     <br>
