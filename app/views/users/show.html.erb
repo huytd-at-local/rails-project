@@ -6,8 +6,20 @@
         <p><%= link_to("edit", "/users/#{@user.id}/edit") %> </p>
     <% end %>
     <!-- follower count -->
-    <%= "#{@follows.count} followers"%>
-    <% if @current_user %>
+    <%= "#{@follows.count} followers" %>
+    <p>Follower:</p>
+    <% @follows.each do |follow| %>
+    <% user = follow.user %>
+    <%= link_to(user.name, "/users/#{user.id}") %>
+    <% end %>
+    <br>
+    <p>Following <%= @followings.count %>:</p>
+    <% @followings.each do |following| %>
+    <% user = following.following %>
+    <%= link_to(user.name, "/users/#{user.id}") %>
+    <% end %>
+    <br>
+    <% if @current_user && @current_user.id != @user.id %>
             <% if Follow.find_by(follow_user_id: @user.id, follower_id: @current_user.id) %>
                 <%= link_to("unfollow", "/users/#{@user.id}/unfollow", {method: "post"}) %>
             <% else %>

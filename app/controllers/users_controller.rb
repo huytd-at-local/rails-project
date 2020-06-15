@@ -29,6 +29,7 @@ class UsersController < ApplicationController
     @posts = @user.posts.order(created_at: :desc)
     @likes = Like.where(user_id: @user.id).order(created_at: :desc)
     @follows = Follow.where(follow_user_id: @user.id).order(created_at: :desc)
+    @followings = Follow.where(follower_id: @user.id).order(created_at: :desc)
   end
 
   def edit

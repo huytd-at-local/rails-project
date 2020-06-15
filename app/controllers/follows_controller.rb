@@ -1,9 +1,13 @@
 class FollowsController < ApplicationController
   before_action :ensure_login
   def follow
-    follow = Follow.new(follow_user_id: params[:id], follower_id: @current_user.id)
-    follow.save
-    redirect_to("/users/#{params[:id]}")
+    if @current_user.id != params[:id].to_i
+      follow = Follow.new(follow_user_id: params[:id], follower_id: @current_user.id)
+      follow.save
+      redirect_to("/users/#{params[:id]}")
+    else
+      redirect_to("/users/#{params[:id]}")
+    end
   end
 
   def unfollow
