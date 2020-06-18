@@ -5,17 +5,27 @@
 </div>
 
 <div class="container">
-    <p>
-        <%= @test %>
-    </p>
-    <img src="<%= @image %>" alt="">
-    <p>
-        <%= @title %>
-    </p>
-    <p>
-        <%= @authors %>
-    </p>
-    <p>
-        <%= @description %>
-    </p>
+    <% if @items %>
+        <% @items.each do |item| %>
+            <% if item["volumeInfo"]["imageLinks"] %>
+            <% image = item["volumeInfo"]["imageLinks"]["thumbnail"] %>
+            <% end %>
+            <img src="<%= image %>" alt="">
+            <% title = item["volumeInfo"]["title"] %>
+            <p>
+                <%= title %>
+            </p>
+            <% if item["volumeInfo"]["authors"] %>
+            <% authors = item["volumeInfo"]["authors"][0] %>
+            <% end %>
+            <p>
+                <%= authors %>
+            </p>
+            <% description = item["volumeInfo"]["description"] %>
+            <p>
+                <%= description %>
+            </p>
+            <p>-------------------------</p>
+        <% end %>
+    <% end %>
 </div>

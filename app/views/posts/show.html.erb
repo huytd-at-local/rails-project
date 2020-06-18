@@ -8,7 +8,7 @@
             <% if Like.find_by(post_id: @post.id, user_id: @current_user.id) %>
                 <%= link_to("liked", "/posts/#{@post.id}/likes/destroy", {method: "post"}) %>
             <% else %>
-            <%= link_to("like", "/posts/#{@post.id}/likes/create", {method: "post"}) %>
+                <%= link_to("like", "/posts/#{@post.id}/likes/create", {method: "post"}) %>
             <% end %>
         <% end %>
         <br>
